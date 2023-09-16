@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import Footer from "../includes/footer";
 
 const PatientDash = () => {
   const User = localStorage.getItem("role");
@@ -10,6 +11,7 @@ const PatientDash = () => {
   }, []);
 
   return (
+    <>
     <div className="App">
       <div className="form">
         <div class="cards-container">
@@ -35,7 +37,10 @@ const PatientDash = () => {
           </div>
         </div>
       </div>
+
     </div>
+    <Footer/>
+    </>
   );
 };
 

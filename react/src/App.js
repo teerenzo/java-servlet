@@ -17,13 +17,14 @@ import PrescriptionTable from "./components/patient/prescriptionList";
 import NotFound from "./components/notFound";
 import PhysicianDash from "./components/physician/physicianDash";
 import PatientTable from "./components/physician/patientsTable";
+import Landing from "./components/landing"
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navbar />}>
-          <Route index element={<Login />} />
+          <Route index element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {/* pharmacist */}

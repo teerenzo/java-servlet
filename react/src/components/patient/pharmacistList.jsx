@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
+import Footer from "../includes/footer";
 const PharmacistTable = () => {
   const [pharmacistlist, setPharmacistlist] = useState([]);
 
@@ -59,17 +59,20 @@ const PharmacistTable = () => {
   };
 
   return (
+    <>
     <div className="App">
       <ToastContainer />
-      <div className="form">
-        <table>
-          <thead className="heading">
+      <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available</a>
+
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Gender</th>
-              <th>Age</th>
-              <th>Action</th>
+            <th scope="col" class="px-6 py-3">Name</th>
+            <th scope="col" class="px-6 py-3">Phone</th>
+            <th scope="col" class="px-6 py-3">Gender</th>
+            <th scope="col" class="px-6 py-3">Age</th>
+            <th scope="col" class="px-6 py-3">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -77,13 +80,13 @@ const PharmacistTable = () => {
               ? pharmacistlist.map((pharmacist) => {
                   return (
                     <tr>
-                      <td>{pharmacist.name}</td>
-                      <td>{pharmacist.phoneNumber}</td>
-                      <td>{pharmacist.gender}</td>
-                      <td>{pharmacist.age}</td>
+                      <td class="px-6 py-4">{pharmacist.name}</td>
+                      <td class="px-6 py-4">{pharmacist.phoneNumber}</td>
+                      <td class="px-6 py-4">{pharmacist.gender}</td>
+                      <td class="px-6 py-4">{pharmacist.age}</td>
                       <td>
-                        <button onClick={() => selectPharmacist(pharmacist)}>
-                          Select
+                        <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => selectPharmacist(pharmacist)}>
+                          allow
                         </button>
                       </td>
                     </tr>
@@ -94,6 +97,8 @@ const PharmacistTable = () => {
         </table>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

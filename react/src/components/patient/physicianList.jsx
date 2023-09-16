@@ -61,9 +61,12 @@ const PhysicianTable = () => {
   return (
     <div className="App">
       <ToastContainer />
-      <div className="form">
-        <table>
-          <thead className="heading">
+    
+      <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available</a>
+
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th>Name</th>
               <th>Email</th>
@@ -82,8 +85,8 @@ const PhysicianTable = () => {
                       <td>{physician.gender}</td>
                       <td>{physician.age}</td>
                       <td>
-                        <button onClick={() => selectPhysician(physician)}>
-                          Select
+                        <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => selectPhysician(physician)}>
+                          Allow
                         </button>
                       </td>
                     </tr>

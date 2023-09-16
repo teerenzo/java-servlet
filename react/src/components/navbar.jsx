@@ -9,23 +9,8 @@ function navbar() {
   return (
     <>
       <nav>
-        <div className="logo">E-Hospital</div>
-        <input type="checkbox" id="checkbox"></input>
-        <label for="checkbox" id="icon">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </label>
+        <div className="logo text-[#015AAB]">(250) 786373726</div>
+      
         <ul>
           {Role == "Physician" && (
             <>
@@ -95,8 +80,9 @@ function navbar() {
                 logout
               </a>
             </li>
-          ) : null}
+          ) :  (<a className="text-[#015AAB]" href="/login">Login</a>)}
         </ul>
+       
       </nav>
       <Outlet />
     </>

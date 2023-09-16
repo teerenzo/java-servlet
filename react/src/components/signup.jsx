@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import isPublic from "../utils/isPublic";
 import { ToastContainer, toast } from "react-toastify";
+import LoginImage from '../assets/images/loginImage.png';
+import Footer from './includes/footer';
 
 const Signup = () => {
   useEffect(() => {
@@ -71,7 +73,17 @@ const Signup = () => {
   };
   return (
     <div className="App">
-      <ToastContainer/>
+      <ToastContainer/>   
+        <section class="h-screen bg-[#E4E4E4] flex items-center justify-center">
+  <div class="container h-[80vh] px-6 py-24 bg-white my-10">
+      <div
+      class="g-6 flex h-auto flex-wrap items-center justify-center">
+  <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12 ">
+        <img
+          src={LoginImage}
+          class="w-full"
+          alt="Phone image" />
+      </div>
       <div className="form">
         <div className="register">
           <div className="oneinput">
@@ -157,13 +169,31 @@ const Signup = () => {
           </div>
 
           <button onClick={handlesignup}>sign up</button>
-          <p className="undermessage">
-            {" "}
+        
+
+          <div
+            class="my-4 flex items-center before:mt-0.5 ">
+            <p
+              class="mx-4 mb-0 text-center font-semibold ">
+              have an account?
+            </p>
+        
+            <a class="text-[#015AAB]" href="/login">
             <Link to="/login">login</Link>
-          </p>
+            </a>
+
+            <a class="text-[#015AAB] mx-10" href="/">
+            Back Home
+            </a>
+          </div>
         </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        <Footer/>
       </div>
-    </div>
+  
   );
 };
 

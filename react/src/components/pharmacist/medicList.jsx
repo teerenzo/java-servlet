@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-
+import Footer from "../includes/footer";
 const MedicList = () => {
   const [mediclist, setMediclist] = useState([]);
   const User = localStorage.getItem("role");
@@ -36,17 +36,16 @@ const MedicList = () => {
   });
 
   return (
+    <>
     <div className="App">
       <ToastContainer />
-      <div className="form">
-        <div className="download">
-          <Link to="/pharmacist/addMedic">
+      <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  > <Link to="/pharmacist/addMedic">
             {" "}
-            <button>Add</button>
-          </Link>
-        </div>
-        <table>
-          <thead className="heading">
+            <button>Add Medecine</button>
+          </Link></a>
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th>Name</th>
               <th>Price</th>
@@ -69,6 +68,8 @@ const MedicList = () => {
         </table>
       </div>
     </div>
+       <Footer />
+       </>
   );
 };
 

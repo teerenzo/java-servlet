@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import AddMedicModel from "./giveMedicModel";
+import AddMedicModel from "./PrescribeModel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
+import Footer from "../includes/footer";
 const PatientTable = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [patientlist, setPatientlist] = useState([]);
+  const [mediclist, setMediclist] = useState([]);
   const [patientUsername, setPatientUsername] = useState("");
 
   const User = localStorage.getItem("role");
@@ -37,17 +38,43 @@ const PatientTable = () => {
       });
   }, []);
 
+  useEffect(() => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/pharmacist/medicine",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setMediclist(response.data.payload);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error Occured");
+      });
+  });
+
   return (
+    <>
     <div className="App">
       <ToastContainer />
-      <div className="form">
+      <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available Patients</a>
+
         <AddMedicModel
+          mediclist={mediclist}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           patientUsername={patientUsername}
         />
-        <table>
-          <thead className="heading">
+         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th>Username</th>
               <th>Name</th>
@@ -86,12 +113,13 @@ const PatientTable = () => {
                       <td>
                         {patient.consultation ? (
                           <button
+                          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                             onClick={() => {
                               setPatientUsername(patient.username);
                               setIsOpen(true);
                             }}
                           >
-                            Give Medic
+                           prescribe
                           </button>
                         ) : null}
                       </td>
@@ -103,6 +131,8 @@ const PatientTable = () => {
         </table>
       </div>
     </div>
+     <Footer />
+     </>
   );
 };
 

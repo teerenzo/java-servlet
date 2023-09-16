@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "../includes/footer";
 
 const AddMedic = () => {
   const User = localStorage.getItem("role");
@@ -55,6 +56,7 @@ const AddMedic = () => {
   };
 
   return (
+    <>
     <div className="App">
       <ToastContainer />
       <div className="form">
@@ -89,6 +91,8 @@ const AddMedic = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

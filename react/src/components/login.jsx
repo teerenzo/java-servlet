@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import isPublic from "../utils/isPublic";
 import { ToastContainer, toast } from "react-toastify";
+import LoginImage from '../assets/images/loginImage.png';
+import Footer from './includes/footer';
 
 const Login = () => {
   useEffect(() => {
@@ -71,8 +73,29 @@ const Login = () => {
   return (
     <div className="App">
       <ToastContainer />
+      <section class="h-screen bg-[#E4E4E4] flex items-center justify-center">
+  <div class="container h-[80vh] px-6 py-24 bg-white my-10">
+      <div
+      class="g-6 flex h-auto flex-wrap items-center justify-center">
+  <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12 ">
+        <img
+          src={LoginImage}
+          class="w-full"
+          alt="Phone image" />
+      </div>
       <div className="form">
         <div className="login">
+        <select
+            name="role"
+            id="role"
+            onChange={(e) => onInputChange(e)}
+            title="login as"
+          >
+            <option selected disabled value="">Select Role</option>  
+                      <option value="Patient">Patient</option>
+            <option value="Pharmacist">Pharmacist</option>
+            <option value="Physician">Physician</option>
+          </select>
           <input
             type="text"
             placeholder="Email, Username or Phone number"
@@ -87,23 +110,29 @@ const Login = () => {
             value={password}
             onChange={(e) => onInputChange(e)}
           ></input>
-          <select
-            name="role"
-            id="role"
-            onChange={(e) => onInputChange(e)}
-            title="login as"
-          >
-            <option value="Patient">Patient</option>
-            <option value="Pharmacist">Pharmacist</option>
-            <option value="Physician">Physician</option>
-          </select>
-          <button onClick={handlelogin}>login</button>
-          <p className="undermessage">
-            {" "}
+        
+          <button className="bg-[#015AAB]" onClick={handlelogin}>login</button>
+         
+      
+          <div
+            class="my-4 flex items-center before:mt-0.5 ">
+            <p
+              class="mx-4 mb-0 text-center font-semibold ">
+              New to site?
+            </p>
+        
+            <a class="text-[#015AAB]" >
             <Link to="/signup">sign up</Link>
-          </p>
+            </a>
+         
+
+          </div>
         </div>
       </div>
+      </div>
+    </div>
+      </section>
+      <Footer/>
     </div>
   );
 };
