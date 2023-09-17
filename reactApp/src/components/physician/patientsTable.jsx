@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import AddMedicModel from "./giveMedicModel";
 import axios from "axios";
-import GiveConsultationModal from "./giveConsultationModel";
+import ConsultationModal from "./ConsultationModel";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "../includes/footer";
 
@@ -46,7 +45,7 @@ const PatientTable = () => {
       <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
       <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available</a>
 
-        <GiveConsultationModal
+        <ConsultationModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           patientUsername={patientUsername}
@@ -72,14 +71,17 @@ const PatientTable = () => {
 
                       <td>{patient.age}</td>
                       <td>
-                        <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          onClick={() => {
-                            setPatientUsername(patient.username);
-                            setIsOpen(true);
-                          }}
-                        >
-                          Consultation
-                        </button>
+                        {localStorage.getItem(patient.username)&&localStorage.getItem(patient.username).split('"')[1]==patient.username? (
+                        <a> Consulted</a> 
+                        ) :  <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        onClick={() => {
+                          setPatientUsername(patient.username);
+                          setIsOpen(true);
+                        }}
+                      >
+                        Consultation
+                      </button>}
+                       
                       </td>
                     </tr>
                   );

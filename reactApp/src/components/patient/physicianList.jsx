@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "../includes/footer";
 
 const PhysicianTable = () => {
   const [physicianlist, setPhysicianlist] = useState([]);
@@ -58,7 +59,7 @@ const PhysicianTable = () => {
       });
   };
 
-  return (
+  return (<>
     <div className="App">
       <ToastContainer />
     
@@ -97,6 +98,8 @@ const PhysicianTable = () => {
         </table>
       </div>
     </div>
+       <Footer/>
+       </>
   );
 };
 

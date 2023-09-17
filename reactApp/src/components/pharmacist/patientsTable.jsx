@@ -111,17 +111,23 @@ const PatientTable = () => {
                           : null}
                       </td>
                       <td>
-                        {patient.consultation ? (
-                          <button
-                          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                            onClick={() => {
-                              setPatientUsername(patient.username);
-                              setIsOpen(true);
-                            }}
-                          >
-                           prescribe
-                          </button>
-                        ) : null}
+                        {localStorage.getItem(patient.username)&&localStorage.getItem(patient.username).split('"')[1]!=patient.username? (
+                          <span>
+                               {patient.consultation ? (
+                         
+                         <button
+                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                           onClick={() => {
+                             setPatientUsername(patient.username);
+                             setIsOpen(true);
+                           }}
+                         >
+                          prescribe
+                         </button>
+                       ) : null}
+                          </span>
+                        ) : <a>prescribed</a>}
+                     
                       </td>
                     </tr>
                   );

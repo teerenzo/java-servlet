@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  javaapi:
+    build: ./java
+    container_name: java_c
+    ports:
+      - '8080:8080'
+  node:
+    build: ./node
+    container_name: node_c
+    ports:
+      - '4000:4000'
+    depends_on:
+      - javaapi  
+  reactapp:
+    build: ./reactApp
+    container_name: myreact_c
+    ports:
+      - '3000:3000'
+    depends_on:
+      - node  

@@ -1,40 +1,82 @@
 import React from "react";
-import { useEffect } from "react";
 import Footer from "../includes/footer";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const PatientDash = () => {
   const User = localStorage.getItem("role");
+  const [consultation, setConsultion] = useState([]);
+  const [pharmacistlist, setPharmacistlist] = useState([]);
+  const [prescriptionlist, setPrescriptionlist] = useState([]);
   useEffect(() => {
     if (User !== "Patient") {
       window.location.replace("/login");
     }
   }, []);
 
+  useEffect(() => {
+    
+    let config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: "http://localhost:4000/api/patient/consultation",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+        setConsultion(response.data.payload);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
+  },[]);
+
+  useEffect(() => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/patient/prescription",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setPrescriptionlist(response.data.payload);
+      })
+      .catch((error) => {
+        console.log(error);
+
+      });
+  }, []);
+
+
   return (
     <>
     <div className="App">
       <div className="form">
-        <div class="cards-container">
+        <div class="flex gap-20 justify-center">
           <div class="card">
-            <h2>Prescriptions Filled Today</h2>
+            <h2>Consultation</h2>
             <p>
-              50<small> prescriptions</small>
+              {consultation&&consultation.length}
             </p>
           </div>
 
           <div class="card">
-            <h2>Revenue Today</h2>
+            <h2>Prescription(s)</h2>
             <p>
-              $5000<small> CAD</small>
+              {pharmacistlist.length}
             </p>
           </div>
 
-          <div class="card">
-            <h2>Average Turnaround Time</h2>
-            <p>
-              30<small> minutes</small>
-            </p>
-          </div>
         </div>
       </div>
 

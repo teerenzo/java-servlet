@@ -145,6 +145,7 @@ const Signup = () => {
                 type="text"
                 placeholder="email"
                 name="indetifier"
+                
                 value={indetifier}
                 onChange={(e) => onInputChange(e)}
               ></input>

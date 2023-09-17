@@ -9,6 +9,10 @@ function PrescriptionMedicineModal({mediclist, isOpen, setIsOpen, patientUsernam
     setMedicineName(e.target.value);
   };
 
+  const storeSelectedInLocalStorage = () => {
+    localStorage.setItem(patientUsername, JSON.stringify(patientUsername));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!medicineName.trim()) {
@@ -35,6 +39,7 @@ function PrescriptionMedicineModal({mediclist, isOpen, setIsOpen, patientUsernam
     axios
       .request(config)
       .then((response) => {
+        storeSelectedInLocalStorage();
         toast.success(response.data.message);
         setMedicineName("");
         setIsOpen(false);

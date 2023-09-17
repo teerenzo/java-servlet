@@ -13,6 +13,8 @@ const PharmacistTable = () => {
     }
   }, []);
 
+
+
   useEffect(() => {
     let config = {
       method: "get",
@@ -34,7 +36,20 @@ const PharmacistTable = () => {
       });
   }, []);
 
+  const storeSelectedInLocalStorage = (pharmacist) => {
+
+    localStorage.setItem(pharmacist.phoneNumber, JSON.stringify(pharmacist));
+  };
+
+  const getSelectedFromLocalStorage = (pharmacist1) => {
+    const pharmacist = localStorage.getItem(pharmacist1);
+
+    return JSON.parse(pharmacist);
+  };
+
+
   const selectPharmacist = (pharmacist) => {
+
     let config = {
       method: "post",
       url: "http://localhost:4000/api/patient/select-pharmacist",
@@ -49,8 +64,9 @@ const PharmacistTable = () => {
     axios
       .request(config)
       .then((response) => {
+        storeSelectedInLocalStorage(pharmacist);
        toast.success("Pharmacist Selected");
-        window.location.replace("/patient/consultation");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -63,7 +79,7 @@ const PharmacistTable = () => {
     <div className="App">
       <ToastContainer />
       <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
-      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available</a>
+      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available Pharmacist</a>
 
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -72,6 +88,8 @@ const PharmacistTable = () => {
             <th scope="col" class="px-6 py-3">Phone</th>
             <th scope="col" class="px-6 py-3">Gender</th>
             <th scope="col" class="px-6 py-3">Age</th>
+            <th scope="col" class="px-6 py-3">Status</th>
+
             <th scope="col" class="px-6 py-3">Action</th>
             </tr>
           </thead>
@@ -85,8 +103,13 @@ const PharmacistTable = () => {
                       <td class="px-6 py-4">{pharmacist.gender}</td>
                       <td class="px-6 py-4">{pharmacist.age}</td>
                       <td>
+                        <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" >
+                        {getSelectedFromLocalStorage(pharmacist.phoneNumber)&&getSelectedFromLocalStorage(pharmacist.phoneNumber).phoneNumber==pharmacist.phoneNumber?"allowed":"not yet"}  
+                        </button>
+                      </td>
+                      <td>
                         <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => selectPharmacist(pharmacist)}>
-                          allow
+                    allow
                         </button>
                       </td>
                     </tr>

@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import AddMedicModel from "./giveMedicModel";
 import axios from "axios";
-
+import Footer from "../includes/footer";
 const ConsultationTable = () => {
   const [consultation, setConsultion] = useState([]);
 
@@ -37,10 +36,13 @@ const ConsultationTable = () => {
 
   console.log("here",consultation);
   return (
+    <>
     <div className="App">
-      <div className="form">
-        <table>
-          <thead className="heading">
+        <div class="mx-10 relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+      <a  class=" px-10 py-2 mb-4 text-white  bg-blue-400 rounded"  >Available Consultation</a>
+
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th>Physician</th>
               <th>Disease Name</th>
@@ -59,6 +61,8 @@ const ConsultationTable = () => {
         </table>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

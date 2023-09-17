@@ -1,12 +1,35 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const PhysicianDash = () => {
   const User = localStorage.getItem("role");
+  const [patientlist, setPatientlist] = useState([]);
   useEffect(() => {
     if (User !== "Physician") {
       window.location.replace("/login");
     }
+  }, []);
+
+  useEffect(() => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/physician/patient",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setPatientlist(response.data.payload);
+      })
+      .catch((error) => {
+        console.log(error);
+    
+      });
   }, []);
 
   return (
@@ -14,25 +37,12 @@ const PhysicianDash = () => {
       <div className="form">
         <div class="cards-container">
           <div class="card">
-            <h2>Prescriptions Filled Today</h2>
+            <h2>Assigned Patient(s)</h2>
             <p>
-              50<small> prescriptions</small>
+              {patientlist&&patientlist.length}<small> </small>
             </p>
           </div>
 
-          <div class="card">
-            <h2>Revenue Today</h2>
-            <p>
-              $5000<small> CAD</small>
-            </p>
-          </div>
-
-          <div class="card">
-            <h2>Average Turnaround Time</h2>
-            <p>
-              30<small> minutes</small>
-            </p>
-          </div>
         </div>
       </div>
     </div>

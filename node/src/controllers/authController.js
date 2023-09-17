@@ -3,10 +3,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const tomcatUrl = process.env.TOMCAT_SERVER_URL;
+
+
+
 const signup = async (req, res) => {
   try {
     const { name, age, gender, username, password, role, phone, email } =
       req.body;
+      console.log("url ",tomcatUrl);
     console.log(role);
     if (!role || role == "")
       return res.status(400).json({ error: "role is required" });
@@ -113,10 +117,9 @@ const login = async (req, res) => {
     const api = await axios.request(config);
     return res.status(api.status).json(api.data);
   } catch (error) {
-    console.log(error);
     return res
-      .status(error.response.status)
-      .json({ error: error.response.data.message });
+      .status(500)
+      .json({ error: "Server Error"});
   }
 };
 
